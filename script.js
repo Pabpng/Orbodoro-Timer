@@ -31,10 +31,10 @@ const startTimer = () => {
         timeLeft--;
         updateTimer();
 
-        if(timeLeft === 0) {
+        if(timeLeft < 0) {
             clearInterval(interval);
             alert("Time's up!")
-            timeLeft = 25 * 60;
+            timeLeft = selectedTime;
             updateTimer();
         }
     }, 1000)
