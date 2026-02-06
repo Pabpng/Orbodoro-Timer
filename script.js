@@ -24,7 +24,7 @@ const updateTimer = () => {
 
 const startTimer = () => {
     if (timeLeft === 0){
-        alert("Time needs to be selected!")
+        alert("Please select a time!")
     } else {
 
         interval = setInterval(() => {
@@ -42,12 +42,23 @@ const startTimer = () => {
 };
 
 //Pause Timer Function
-const pauseTimer = () => clearInterval(interval);
+//const pauseTimer = () => clearInterval(interval);
+const pauseTimer = () => {
+    if (timeLeft === 0) {
+        alert("Please select a time!")
+    } else {
+        clearInterval(interval);
+    }
+}
 
 const resetTimer = () => {
-    clearInterval(interval);
-    timeLeft = selectedTime;
-    updateTimer();
+    if(timeLeft === 0){
+        alert("Please select a time!")
+    } else {
+        clearInterval(interval);
+        timeLeft = selectedTime;
+        updateTimer();
+    }
 }
 
 const pomodoro = () => {
