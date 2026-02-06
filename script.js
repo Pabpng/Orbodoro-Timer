@@ -50,7 +50,7 @@ const resetTimer = () => {
     updateTimer();
 }
 
-const Pomodoro = () => {
+const pomodoro = () => {
     clearInterval(interval);
     timeLeft = 25 * 60;
     selectedTime = 25 * 60;
@@ -77,6 +77,6 @@ pause.addEventListener("click", pauseTimer);
 reset.addEventListener("click", resetTimer);
 shortBreak.addEventListener("click", shortTimer);
 longBreak.addEventListener("click", longTimer);
-pomodoroTimer.addEventListener("click", Pomodoro);
+pomodoroTimer.addEventListener("click", pomodoro);
 
 
