@@ -1,16 +1,15 @@
 //Imports
 const start = document.getElementById("start");
-const pause = document.getElementById("pause");
 const reset = document.getElementById("reset");
 const shortBreak = document.getElementById("shortBreak");
-const longBreak = document.getElementById("longBreak");
 const timer = document.getElementById("timer");
 const pomodoroTimer = document.getElementById("pomodoro");
 
 //Timer Logic
-let timeLeft = 0;
+let timeLeft = 25 * 60;
+let selectedTime = 25 * 60;
 let interval;
-let selectedTime = 0;
+let isRunning = false;
 
 const updateTimer = () => {
     const minutes = Math.floor(timeLeft / 60);
@@ -23,42 +22,32 @@ const updateTimer = () => {
 };
 
 const startTimer = () => {
-    if (timeLeft === 0){
-        alert("Please select a time!")
-    } else {
+    if(isRunning) return;
 
-        interval = setInterval(() => {
+    isRunning = true;
+
+    interval = setInterval(() => {
         timeLeft--;
         updateTimer();
 
         if(timeLeft < 0) {
             clearInterval(interval);
-            alert("Time's up!")
+            alert("Good Work!");
             timeLeft = selectedTime;
             updateTimer();
         }
     }, 1000)
-    }
 };
 
 //Pause Timer Function
-//const pauseTimer = () => clearInterval(interval);
 const pauseTimer = () => {
-    if (timeLeft === 0) {
-        alert("Please select a time!")
-    } else {
-        clearInterval(interval);
-    }
+    clearInterval(interval);
 }
 
 const resetTimer = () => {
-    if(timeLeft === 0){
-        alert("Please select a time!")
-    } else {
-        clearInterval(interval);
-        timeLeft = selectedTime;
-        updateTimer();
-    }
+    clearInterval(interval);
+    timeLeft = selectedTime;
+    updateTimer();
 }
 
 const pomodoro = () => {
@@ -75,19 +64,39 @@ const shortTimer = () => {
     updateTimer();
 }
 
-const longTimer = () => {
-    clearInterval(interval);
-    timeLeft = 10 * 60;
-    selectedTime = 10 * 60;
-    updateTimer();
-}
-
 //Event listener for each button
-start.addEventListener("click", startTimer);
-pause.addEventListener("click", pauseTimer);
-reset.addEventListener("click", resetTimer);
-shortBreak.addEventListener("click", shortTimer);
-longBreak.addEventListener("click", longTimer);
-pomodoroTimer.addEventListener("click", pomodoro);
+start.addEventListener("click", () => {
+    if(!isRunning){
+        startTimer();
+        start.textContent = "Pause";
+        isRunning = true;
+    } else {
+        pauseTimer();
+        start.textContent = "Start";
+        isRunning = false;
+    }
+});
+// reset.addEventListener("click", resetTimer);
+reset.addEventListener("click", () => {
+    start.textContent = "Start";
+    isRunning = false;
+    resetTimer();
+});
+
+//shortBreak.addEventListener("click", shortTimer);
+
+shortBreak.addEventListener("click", () => {
+    start.textContent = "Start";
+    isRunning = false;
+    shortTimer();
+});
+
+//pomodoroTimer.addEventListener("click", pomodoro);
+
+pomodoroTimer.addEventListener("click", () => {
+    start.textContent = "Start";
+    isRunning = false;
+    pomodoro();
+})
 
 
