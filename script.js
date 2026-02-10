@@ -6,6 +6,11 @@ const timer = document.getElementById("timer");
 const pomodoroTimer = document.getElementById("pomodoro");
 const minimizeBtn = document.getElementById("minimizeBtn");
 const closeBtn = document.getElementById("closeBtn");
+const playBtn = document.getElementById("play");
+const settingBtn = document.getElementById("settings");
+const backBtnTM = document.getElementById("backTimerToMenu");
+const backBtnSM = document.getElementById("backSettingToMenu");
+
 
 //Timer Logic
 let timeLeft = 25 * 60;
@@ -109,3 +114,38 @@ minimizeBtn.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
     window.windowAPI.close();
 });
+
+
+// TODO: Create a page selection function
+
+const menuScreen = document.querySelector(".menuScreen");
+const timerScreen = document.querySelector(".timerScreen");
+const settingScreen = document.querySelector(".settingScreen");
+
+function show(screen) {
+    screen.style.display = "flex";
+}
+
+function hide(screen) {
+    screen.style.display = "none";
+}
+
+playBtn.addEventListener("click", () => {
+    hide(menuScreen);
+    show(timerScreen);
+})
+
+settingBtn.addEventListener("click", () => {
+    hide(menuScreen);
+    show(settingScreen);
+})
+
+backBtnTM.addEventListener("click", () => {
+    hide(timerScreen);
+    show(menuScreen);
+})
+
+backBtnSM.addEventListener("click", () => {
+    hide(settingScreen);
+    show(menuScreen);
+})

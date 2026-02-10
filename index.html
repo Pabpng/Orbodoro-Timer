@@ -9,22 +9,48 @@
 
 <body>
     <div class="app">
+
         <div class="windowButtons">
             <button id="minimizeBtn">Minimize</button>
             <button id="closeBtn">Close</button>
         </div>
-        <div class="buttons">
-            <button id="start">Start</button>
-            <button id ="reset">Reset</button>
-            <button id="pomodoro">Pomodoro</button>
-            <button id="shortBreak">Short-Break</button>
+
+        <div class="menuScreen">
+            <div class="menuTitle">
+                Eggodoro-Timer
+            </div>
+            <div class="menuButtons">
+                <button id="play">Play</button>
+                <button id="settings">Settings</button>
+            </div>
         </div>
-        <div class="title">
-            <p>Eggodoro</p>
+
+
+        <div class="timerScreen">
+            <div class="title">
+                <p>Eggodoro</p>
+            </div>
+            <div class="timer">
+                <p class="timer" id="timer">25:00</p>
+            </div>
+            <div class="buttons">
+                <button id="start">Start</button>
+                <button id ="reset">Reset</button>
+                <button id="pomodoro">Pomodoro</button>
+                <button id="shortBreak">Short-Break</button>
+                <button id="backTimerToMenu">Back</button>
+            </div>
         </div>
-        <div class="timer">
-            <p class="timer" id="timer">25:00</p>
+
+        <div class="settingScreen">
+            <div class="title">
+                <p>Settings</p>
+            </div>
+            <div class="settingButtons">
+                <button id="backSettingToMenu">Back</button>
+            </div>
         </div>
+
     </div>
 
     <script src="script.js"></Script>
