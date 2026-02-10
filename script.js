@@ -98,16 +98,14 @@ pomodoroTimer.addEventListener("click", () => {
     start.textContent = "Start";
     isRunning = false;
     pomodoro();
-})
+});
 
 //Minimizing the application!
 minimizeBtn.addEventListener("click", () => {
     window.windowAPI.minimize();
-})
+});
 
 //Closing the application!
 closeBtn.addEventListener("click", () => {
     window.windowAPI.close();
-})
-
-
+});

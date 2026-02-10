@@ -23,3 +23,8 @@ select {
     -webkit-app-region: no-drag;
     cursor: pointer;
 }
+
+.windowButtons {
+    display: flex;
+    justify-content: flex-end;
+}
