@@ -7,9 +7,15 @@ body {
     width: 100vw;
     height: 100vh;
 
-    background: white;
+    background: transparent;
     user-select: none;
     -webkit-app-region: drag;
+
+    background-image: url("assets/Orbodoro-StartUp.svg");
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .app {
@@ -27,6 +33,10 @@ select {
 .windowButtons {
     display: flex;
     justify-content: flex-end;
+}
+
+#backWindow {
+    display: none;
 }
 
 .timerScreen {
@@ -63,8 +73,4 @@ select {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-#backWindow {
-    display: none;
 }
