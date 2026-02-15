@@ -45,37 +45,11 @@ select {
     display: none;
 }
 
-.timerScreen {
+.screen {
     display: none;
-    flex-direction: column;
-    align-items: center;
 }
 
-.settingScreen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-}
-
-.menuScreen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-}
-
-.galleryScreen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-}
-
-.musicScreen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-}
-
-.startScreen {
+.screen.active {
     display: flex;
     flex-direction: column;
     align-items: center;

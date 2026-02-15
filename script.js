@@ -133,48 +133,44 @@ closeBtn.addEventListener("click", () => {
 
 // TODO: Create a page selection function
 
+function show(button) {
+    button.style.display = "flex";
+}
+
+function hide(button) {
+    button.style.display = "none";
+}
+//New Screen Function
+
+function showScreen(name) {
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    document.querySelector(`.${name}`).classList.add("active");
+}
+
 let currentScreen = "start";
-
-
-const startScreen = document.querySelector(".startScreen");
-const menuScreen = document.querySelector(".menuScreen");
-const timerScreen = document.querySelector(".timerScreen");
-const settingScreen = document.querySelector(".settingScreen");
-const galleryScreen = document.querySelector(".galleryScreen");
-const musicScreen = document.querySelector(".musicScreen");
-
-function show(screen) {
-    screen.style.display = "flex";
-}
-
-function hide(screen) {
-    screen.style.display = "none";
-}
 
 backWin.addEventListener("click", () => {
     if(currentScreen === "menu"){
-        hide(menuScreen);
-        show(startScreen);
+        showScreen("startScreen");
         hide(backWin);
         currentScreen = "start";
     } else if (currentScreen === "timer") {
-        hide(timerScreen);
-        show(menuScreen);
+        showScreen("menuScreen");
         currentScreen = "menu";
         isRunning = false;
         resetTimer();
         start.textContent = "Start";
     } else if (currentScreen === "settings") {
-        hide(settingScreen);
-        show(menuScreen);
+        showScreen("menuScreen");
         currentScreen = "menu";
     } else if (currentScreen === "gallery") {
-        hide(galleryScreen);
-        show(menuScreen);
+        showScreen("menuScreen");
         currentScreen = "menu";
     } else if (currentScreen === "music") {
-        hide(musicScreen);
-        show(menuScreen);
+        showScreen("menuScreen");
         currentScreen = "menu";
     } else {
         return;
@@ -184,41 +180,34 @@ backWin.addEventListener("click", () => {
 
 //Start Screen 
 playBtn.addEventListener("click", () => {
-    hide(startScreen);
-    show(menuScreen);
+    showScreen("menuScreen");
     show(backWin);
     currentScreen = "menu";
 })
 
 //Menu Screen
 orbTimerBtn.addEventListener("click", () => {
-    hide(menuScreen);
-    show(timerScreen);
+    showScreen("timerScreen");
     show(backWin);
     currentScreen = "timer";
 })
 
 settingBtn.addEventListener("click", () => {
-    hide(menuScreen);
-    show(settingScreen);
+    showScreen("settingScreen");
     show(backWin);
     currentScreen = "settings";
 })
 
 galleryBtn.addEventListener("click", () => {
-    hide(menuScreen);
-    show(galleryScreen);
+    showScreen("galleryScreen");
     show(backWin);
     currentScreen = "gallery";
-
 })
 
 musicBtn.addEventListener("click", () => {
-    hide(menuScreen);
-    show(musicScreen);
+    showScreen("musicScreen");
     show(backWin);
     currentScreen = "music";
-
 })
 
 //Functionality and technical changes
