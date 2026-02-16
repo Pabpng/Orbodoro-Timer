@@ -16,12 +16,6 @@ body {
     padding: 16px;
 }
 
-.frame {}
-
-.hotBar {}
-
-.content {}
-
 button,
 input,
 textarea,
@@ -35,11 +29,78 @@ select {
     justify-content: flex-end;
 }
 
-#minimizeBtn {}
+.settingsSlider {
+    display: flex;
+    width: 75%;
+    margin-top: 50px;
+    align-items: center;
+    gap: 10px;
+}
 
-#closeBtn {}
+.settingsSlider::-webkit-slider-runnable-track {
+    height: 10px;
+    background-color: gray;
+    border-radius: 12px;
+}
 
-#play {}
+#breakSlider {
+    -webkit-appearance: none;
+    width: 80%;
+    height: 10px;
+    background: gray;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 12px;
+}
+
+#breakSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background: black;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+
+#timerSlider{
+    -webkit-appearance: none;
+    width: 80%;
+    height: 10px;
+    background: gray;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 12px;
+}
+
+#timerSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background: black;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+
+.breakSlider {
+    flex: 1;
+}
+
+.timerSlider {
+    flex: 1;
+}
+
+.sliderLabel {
+    font-size: 16px;
+    white-space: nowrap;
+}
 
 #backWindow {
     display: none;

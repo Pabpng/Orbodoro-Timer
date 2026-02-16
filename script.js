@@ -23,11 +23,13 @@ const backBtnSM = document.getElementById("backSettingToMenu");
 const backBtnGM = document.getElementById("backGalleryToMenu");
 const backBtnMM = document.getElementById("backMusicToMenu");
 
-//const backBtnTM = document.getElementById("backTimerToMenu");
-//const backBtnSM = document.getElementById("backSettingToMenu");
 
+/* Start of Timer Logic 
+-
+-
+-
+*/
 
-//Timer Logic
 let timeLeft = 25 * 60;
 let selectedTime = 25 * 60;
 let interval;
@@ -86,6 +88,12 @@ const shortTimer = () => {
     updateTimer();
 }
 
+/* End of Timer Logic 
+-
+-
+-
+*/
+
 //Starting the timer!
 start.addEventListener("click", () => {
     if(!isRunning){
@@ -105,6 +113,7 @@ reset.addEventListener("click", () => {
     isRunning = false;
     resetTimer();
 });
+
 
 //Changing to short-break timer!
 shortBreak.addEventListener("click", () => {
@@ -131,7 +140,6 @@ closeBtn.addEventListener("click", () => {
 });
 
 
-// TODO: Create a page selection function
 
 function show(button) {
     button.style.display = "flex";
@@ -210,11 +218,13 @@ musicBtn.addEventListener("click", () => {
     currentScreen = "music";
 })
 
-//Functionality and technical changes
+/* Slider Button Function 
+-
+-
+-
+*/
 
-//TODO: Have ".screen" and ".screen.active" be universal
-//shared across all the screen intances, rather than being 
-//treated as indivdual screens (Helps with file size and computation)
+
 
 //TODO: Create sliders in the settings that adjusts the Timer,
 //The Rest time and the volume of the app.
@@ -229,3 +239,4 @@ musicBtn.addEventListener("click", () => {
 
 //TODO: Redesign the version app into something a bit more colourful
 //and intriguing 
+
