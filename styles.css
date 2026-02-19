@@ -35,6 +35,17 @@ select {
     margin-top: 50px;
     align-items: center;
     gap: 10px;
+    margin: 10px 0;
+}
+
+.settingsSlider label {
+    width: 100px;
+    text-align: center;
+    margin: 10px;
+}
+
+.settingsSlider input[type="range"]{
+    flex: 1;
 }
 
 .settingsSlider::-webkit-slider-runnable-track {
@@ -79,6 +90,52 @@ select {
 }
 
 #timerSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background: black;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+
+#musicSlider{
+    -webkit-appearance: none;
+    width: 80%;
+    height: 10px;
+    background: gray;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 12px;
+}
+
+#musicSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background: black;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+
+#sfxSlider{
+    -webkit-appearance: none;
+    width: 80%;
+    height: 10px;
+    background: gray;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 12px;
+}
+
+#sfxSlider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     height: 15px;

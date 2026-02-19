@@ -88,6 +88,16 @@ const shortTimer = () => {
     updateTimer();
 }
 
+const timerSlider = document.getElementById("timerSlider");
+
+timerSlider.addEventListener("input", (e) => {
+    let minutes = parseInt(e.target.value);
+    timeLeft = minutes * 60;
+    selectedTime = minutes * 60;
+    updateTimer();
+})
+
+
 /* End of Timer Logic 
 -
 -
