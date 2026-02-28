@@ -4,6 +4,7 @@
 const start = document.getElementById("start");
 const reset = document.getElementById("reset");
 const timer = document.getElementById("timer");
+const timerTitle = document.getElementById("timertitle");
 
 
 
@@ -54,7 +55,8 @@ const breakSlider = document.getElementById("breakSlider");
 ======================== */
 let timeLeft = 25 * 60;
 let breakTime = 5 * 60;
-let selectedTime = 25 * 60;
+let selectedPomodoroTime = 25 * 60;
+let selectedBreakTime = 5 * 60;
 let interval;
 let isRunning = false;
 let intermission = false;
@@ -69,6 +71,26 @@ const updateTimer = () => {
     ${seconds.toString().padStart(2, "0")}`;
 };
 
+// const startTimer = () => {
+//     if(isRunning) return;
+
+//     isRunning = true;
+
+//     interval = setInterval(() => {
+//         timeLeft--;
+//         updateTimer();
+
+//         if(timeLeft < 0) {
+//             clearInterval(interval);
+//             alert("Good Work!");
+//             timeLeft = selectedPomodoroTime;
+//             updateTimer();
+//         }
+//     }, 1000)
+// };
+
+let timerStage = "Pomodoro"; // Pomodoro and Rest
+
 const startTimer = () => {
     if(isRunning) return;
 
@@ -80,9 +102,22 @@ const startTimer = () => {
 
         if(timeLeft < 0) {
             clearInterval(interval);
-            alert("Good Work!");
-            timeLeft = selectedTime;
-            updateTimer();
+            //Depending on Timer Stage, we switch the clock!
+            if(timerStage === "Pomodoro" && timeLeft < 0) {
+                timerStage = "Rest";
+                timeLeft = selectedBreakTime;
+                updateTimer();
+                start.textContent = "Start";
+                timerTitle.textContent = "Resting...";
+                alert("Orbodoro Completed! Time to Rest!")
+            } else if (timerStage === "Rest" && timeLeft < 0) {
+                timerStage = "Pomodoro";
+                timeLeft = selectedPomodoroTime;
+                updateTimer();
+                start.textContent = "Start";
+                timerTitle.textContent = "Orbodoro!"
+                alert("Rest completed! Switching to Orbodoro!")
+            }
         }
     }, 1000)
 };
@@ -134,7 +169,7 @@ reset.addEventListener("click", () => {
 
 const resetTimer = () => {
     clearInterval(interval);
-    timeLeft = selectedTime;
+    timeLeft = selectedPomodoroTime;
     updateTimer();
 }
 
@@ -146,14 +181,16 @@ const resetTimer = () => {
 timerSlider.addEventListener("input", (e) => {
     let minutes = parseInt(e.target.value);
     timeLeft = minutes * 60;
-    selectedTime = minutes * 60;
+    selectedPomodoroTime = minutes * 60;
     updateTimer();
 })
 
 breakSlider.addEventListener("input", (e) => {
     let minutes = parseInt(e.target.value);
     breakTime = minutes * 60;
+    selectedBreakTime = minutes * 60;
     updateTimer();
+    //restUpdateTimer();
 })
 
 
