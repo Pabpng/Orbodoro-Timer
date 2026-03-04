@@ -55,6 +55,8 @@ const restAudio = document.getElementById("restMusic");
 ======================== */
 const timerSlider = document.getElementById("timerSlider");
 const breakSlider = document.getElementById("breakSlider");
+const musicSlider = document.getElementById("musicSlider");
+const sfxSlider = document.getElementById("sfxSlider");
 
 
 
@@ -220,7 +222,7 @@ const resetTimer = () => {
 
 
 /* ======================= 
-   TIMER SLIDERS!
+   EVENT SLIDERS!
 ======================== */
 timerSlider.addEventListener("input", (e) => {
     let minutes = parseInt(e.target.value);
@@ -234,8 +236,21 @@ breakSlider.addEventListener("input", (e) => {
     breakTime = minutes * 60;
     selectedBreakTime = minutes * 60;
     updateTimer();
-    //restUpdateTimer();
 })
+
+musicSlider.addEventListener("input", (e) => {
+    let volume = parseFloat(e.target.value);
+
+    startAudio.volume = volume;
+    timerAudio.volume = volume;
+    restAudio.volume = volume;
+})
+
+sfxSlider.addEventListener("input", (e) => {
+    let volume = parseFloat(e.target.value);
+})
+
+
 
 
 
@@ -405,9 +420,10 @@ musicBtn.addEventListener("click", () => {
     1. When the "Study Timer" has completed - Switch to the "Rest Timer" logic and allow them to start the break manually. (Completed)
     2. If the attempt to leave the page before the timer has been completed, send a confirmation window before canceling progress. (Completed)
     3. Add music that loops for both the "Study Timer", "Rest Timer" and the "Main Menu" Screen. (Completed)
-    4. Modify the "Music Volume Slider" in the settings page to have an affect on the music, and make the music fade in and out when toggled.
-    5. Add sfx to button presses. 
-    6. Modify the "SFX Volume Slider" in the settings page to have an affect on the sfx.
+    4. Modify the "Music Volume Slider" in the settings page to have an affect on the music. (Completed)
+    5. Make the music fade in and out when toggled.
+    6. Add sfx to button presses. 
+    7. Modify the "SFX Volume Slider" in the settings page to have an affect on the sfx.
 
     TO BE CONTINUED.
 */
