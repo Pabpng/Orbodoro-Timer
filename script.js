@@ -44,8 +44,9 @@ const musicBtn = document.getElementById("music");
 /* ======================= 
    AUDIO IMPORTS!
 ======================== */
-const startAudio = document.getElementById("startMusic");
-const timerAudio = document.getElementById("timerMusic");
+const startAudio = document.getElementById("startMenuMusic");
+const timerAudio = document.getElementById("OrbodoroMusic");
+const restAudio = document.getElementById("restMusic");
 
 
 
@@ -91,6 +92,7 @@ const startTimer = () => {
 
         if(timeLeft < 0) {
             clearInterval(interval);
+            isRunning = false;
             //Depending on Timer Stage, we switch the clock!
             if(timerStage === "Pomodoro" && timeLeft < 0) {
                 timerStage = "Rest";
@@ -99,6 +101,8 @@ const startTimer = () => {
                 start.textContent = "Start";
                 timerTitle.textContent = "Resting...";
                 alert("Orbodoro Completed! Time to Rest!")
+                //<-- If Pomodoro timer is completed, music stops. -->//
+                resetAudio(timerAudio);
             } else if (timerStage === "Rest" && timeLeft < 0) {
                 timerStage = "Pomodoro";
                 timeLeft = selectedPomodoroTime;
@@ -106,9 +110,10 @@ const startTimer = () => {
                 start.textContent = "Start";
                 timerTitle.textContent = "Orbodoro!"
                 alert("Rest completed! Switching to Orbodoro!")
+                resetAudio(restAudio);
             }
         }
-    }, 1000)
+    }, 100)
 };
 /* ======================= 
    TIMER LOGIC ENDS!
@@ -117,22 +122,66 @@ const startTimer = () => {
 
 
 /* ======================= 
+   AUDIO FUNCTION LOGIC!
+======================== */
+
+function muteAudio(name) {
+    let audio = name;
+    audio.muted = true;
+    audio.pause();
+}
+
+function playAudio(name) {
+    let audio = name;
+    audio.muted = false;
+    audio.play();
+    audio.loop = true;
+}
+
+function pauseAudio(name) {
+    let audio = name;
+    audio.muted = true;
+    audio.pause();
+}
+
+function resetAudio(name) {
+    let audio = name;
+    audio.muted = true;
+    audio.pause();
+    audio.currentTime = 0;
+}
+
+/* ===========================
+   AUDIO FUNCTION LOGIC ENDS!
+==============================*/
+
+
+
+/* ======================= 
    START TIMER LOGIC!
 ======================== */
+
 start.addEventListener("click", () => {
     if(!isRunning){
         startTimer();
         start.textContent = "Pause";
         isRunning = true;
-        timerAudio.muted = false;
-        timerAudio.play()
+
+        if(timerStage === "Pomodoro"){
+            playAudio(timerAudio);
+        } else if(timerStage === "Rest"){
+            playAudio(restAudio);
+        }
     } else {
         pauseTimer();
         start.textContent = "Start";
         isRunning = false;
-        timerAudio.muted = true;
-        timerAudio.pause();
-        timerAudio.currentTime = 0;
+
+        if(timerStage === "Pomodoro"){
+            pauseAudio(timerAudio);
+        } else if(timerStage === "Rest"){
+            pauseAudio(restAudio);
+        }
     }
 });
 
@@ -154,6 +203,12 @@ reset.addEventListener("click", () => {
     start.textContent = "Start";
     isRunning = false;
     resetTimer();
+
+    if(timerStage === "Pomodoro"){
+            resetAudio(timerAudio);
+        } else if(timerStage === "Rest"){
+            resetAudio(restAudio);
+        }
 });
 
 const resetTimer = () => {
@@ -231,12 +286,19 @@ leaveTimerBtn.addEventListener("click", () => {
     currentScreen = "menu";
     resetTimer();
     start.textContent = "Start";
+    playAudio(startAudio);
+
+    if(timerStage === "Pomodoro"){
+        resetAudio(timerAudio);
+    } else if(timerStage === "Rest"){
+        resetAudio(restAudio);
+    }
+    
 });
 
 stayTimerBtn.addEventListener("click", () => {
     hidePopUp("timerPopUp");
-    startTimer();
-    isRunning=true;
+    start.textContent = "start";
 });
 
 
@@ -251,20 +313,34 @@ backWin.addEventListener("click", () => {
         showScreen("startScreen");
         hide(backWin);
         currentScreen = "start";
-        startAudio.muted = false;
-        startAudio.play();
+        playAudio(startAudio);
     } else if (currentScreen === "timer") {
         // <!-- Overlay Pop Up when timer is running or timer is below selected times --> //
         if(isRunning || timeLeft < selectedPomodoroTime || breakTime < selectedBreakTime){
             showPopUp("timerPopUp");
             pauseTimer();
             isRunning = false;
+
+            if(timerStage === "Pomodoro"){
+                pauseAudio(timerAudio);
+            } else if(timerStage === "Rest"){
+                pauseAudio(restAudio);
+            }
+
         } else {
             showScreen("menuScreen");
             currentScreen = "menu";
             isRunning = false;
             resetTimer();
             start.textContent = "Start";
+            playAudio(startAudio);
+            
+            if(timerStage === "Pomodoro"){
+                resetAudio(timerAudio);
+            } else if(timerStage === "Rest"){
+                resetAudio(restAudio);
+            }
+
         }
     } else if (currentScreen === "settings") {
         showScreen("menuScreen");
@@ -288,9 +364,6 @@ playBtn.addEventListener("click", () => {
     showScreen("menuScreen");
     show(backWin);
     currentScreen = "menu";
-    startAudio.muted = true;
-    startAudio.pause();
-    startAudio.currentTime = 0;
 })
 
 
@@ -302,6 +375,7 @@ orbTimerBtn.addEventListener("click", () => {
     showScreen("timerScreen");
     show(backWin);
     currentScreen = "timer";
+    resetAudio(startAudio);
 })
 
 settingBtn.addEventListener("click", () => {
@@ -330,8 +404,8 @@ musicBtn.addEventListener("click", () => {
 /* 
     1. When the "Study Timer" has completed - Switch to the "Rest Timer" logic and allow them to start the break manually. (Completed)
     2. If the attempt to leave the page before the timer has been completed, send a confirmation window before canceling progress. (Completed)
-    3. Add music that loops for both the "Study Timer", "Rest Timer" and the "Main Menu" Screen.
-    4. Modify the "Music Volume Slider" in the settings page to have an affect on the music.
+    3. Add music that loops for both the "Study Timer", "Rest Timer" and the "Main Menu" Screen. (Completed)
+    4. Modify the "Music Volume Slider" in the settings page to have an affect on the music, and make the music fade in and out when toggled.
     5. Add sfx to button presses. 
     6. Modify the "SFX Volume Slider" in the seetings page to have an affect on the sfx.
 
