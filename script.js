@@ -453,7 +453,10 @@ musicBtn.addEventListener("click", () => {
     6. Modify the "SFX Volume Slider" in the settings page to have an affect on the sfx. (Completed)
     7.Make the music fade in and out when toggled.
 
-    TO BE CONTINUED.
+    
+    8. Shift the "Back Button" to the left.
+    9. Add a "Mute" button.
+    10. Add sfx for completeing the timer.
 */
 /* ======================= 
    END OF TODO LIST!
